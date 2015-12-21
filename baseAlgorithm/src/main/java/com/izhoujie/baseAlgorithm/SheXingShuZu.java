@@ -4,6 +4,8 @@ package com.izhoujie.baseAlgorithm;
  * @author km-zhou
  * 
  *         --蛇形数组
+ * 
+ *         --给定正整数n(n>3),回环输出1-n*n的所有数
  *
  */
 public class SheXingShuZu {
