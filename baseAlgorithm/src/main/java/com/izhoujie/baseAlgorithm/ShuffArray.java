@@ -2,6 +2,12 @@ package com.izhoujie.baseAlgorithm;
 
 import java.util.Random;
 
+/**
+ * @author km-zhou
+ * 
+ *         -数组工具类
+ *
+ */
 public class ShuffArray {
 	public static void main(String[] args) {
 
