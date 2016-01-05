@@ -31,7 +31,7 @@ public class SelectInsertSort {
 			temp = array[i];
 			int left = 0;
 			int right = i - 1;
-			// 若此位置可与前面已排序的保持有序则跳过此次折半查找比较
+			// 若此位置可与前面已排序的保持有序则跳过此次折半比较查找
 			if (array[i] < array[i - 1]) {
 				while (left <= right) {
 					int mid = (left + right) / 2;

@@ -39,11 +39,11 @@ public class QuickSort {
 		}
 		int left = start;
 		int right = end;
-		// 中值-"坑"值
+		// 中值 即"坑"值
 		int mid = array[start];
 
 		while (left < right) {
-			// 后向前筛选
+			// 后向前扫描
 			while (left < right && array[right] >= mid) {
 				right--;
 			}

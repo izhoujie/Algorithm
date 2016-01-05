@@ -60,7 +60,7 @@ public class HeapSort {
 			node = right;
 		}
 		int temp;
-		// 若有互换则继续递归检查调整
+		// 若有互换则继续递归进行检查调整
 		if (node != index) {
 			temp = array[index];
 			array[index] = array[node];

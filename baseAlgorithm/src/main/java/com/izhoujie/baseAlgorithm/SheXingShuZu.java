@@ -10,13 +10,16 @@ package com.izhoujie.baseAlgorithm;
  */
 public class SheXingShuZu {
 
+	// 控制循环方向的数组指针：右、下、左、上
 	private static int[][] index = new int[][] { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
 
 	public static void main(String[] args) {
 		SheXingShuZu shuZu = new SheXingShuZu();
+		// 给定的正整数
 		int number = 8;
 
 		int[][] array = new int[number][number];
+		// 数组的蛇形赋值
 		shuZu.print(number, array);
 		int value = 0;
 		// 获取格式化输出位数

@@ -6,6 +6,8 @@ import java.util.Random;
  * @author km-zhou
  * 
  *         -数组工具类
+ * 
+ *         -产生随机的数组数据
  *
  */
 public class ShuffArray {
