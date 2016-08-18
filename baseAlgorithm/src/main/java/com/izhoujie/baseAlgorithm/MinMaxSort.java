@@ -3,7 +3,7 @@ package com.izhoujie.baseAlgorithm;
 import java.util.Arrays;
 
 /**
- * @author km-zhou
+ * @author admin@izhoujie.com
  *
  *         -每次找出当前最值，两遍归中逼近 类似cocktailSort-鸡尾酒排序/双向冒泡排序
  *

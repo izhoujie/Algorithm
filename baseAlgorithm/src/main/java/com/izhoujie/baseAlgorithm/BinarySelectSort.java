@@ -3,7 +3,7 @@ package com.izhoujie.baseAlgorithm;
 import java.util.Arrays;
 
 /**
- * @author km-zhou
+ * @author admin@izhoujie.com
  *
  *         -折半插入排序
  *

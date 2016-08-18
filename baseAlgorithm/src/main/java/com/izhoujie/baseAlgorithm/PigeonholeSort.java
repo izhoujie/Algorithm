@@ -3,7 +3,7 @@ package com.izhoujie.baseAlgorithm;
 import java.util.Arrays;
 
 /**
- * @author km-zhou
+ * @author admin@izhoujie.com
  *
  *         -鸽巢排序
  * 

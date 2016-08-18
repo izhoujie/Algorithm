@@ -1,7 +1,7 @@
 package com.izhoujie.baseAlgorithm;
 
 /**
- * @author km-zhou
+ * @author admin@izhoujie.com
  * 
  *         --蛇形数组
  * 

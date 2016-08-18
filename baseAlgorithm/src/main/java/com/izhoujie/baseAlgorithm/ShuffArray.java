@@ -3,7 +3,7 @@ package com.izhoujie.baseAlgorithm;
 import java.util.Random;
 
 /**
- * @author km-zhou
+ * @author admin@izhoujie.com
  * 
  *         -数组工具类
  * 
