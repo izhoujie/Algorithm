@@ -5,7 +5,7 @@ package com.izhoujie.someinteresting;
  *
  *         2016年9月5日 23:37:05
  * 
- *         题干：求两个数的和，要求不能使用+、-、*、/算数运算符
+ *         题干：求两个数的加减乘除，要求不能使用+、-、*、/算数运算符
  * 
  *         引申：求两个数的差、乘积、相除不能使用+、-、*、/
  * 
@@ -58,12 +58,7 @@ public class BinnaryArithmeticOperation {
 	    }
 	    index = addOneLine(index, 1);
 	}
-
-	if (flag) {
-	    return symbolChange(sum);
-	} else {
-	    return sum;
-	}
+	return flag ? symbolChange(sum) : sum;	   
     }
 
     /**
@@ -74,11 +69,7 @@ public class BinnaryArithmeticOperation {
      */
     public static int getIndexBit(int n, int point) {
 	// 获取n在point位上的值
-	if (((n & (1 << point)) >> point) > 0) {
-	    return 1;
-	} else {
-	    return 0;
-	}
+	return (n >> point) & 1;
     }
 
     /**
