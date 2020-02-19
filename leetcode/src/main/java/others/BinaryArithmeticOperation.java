@@ -13,7 +13,7 @@ package others;
  * 
  *         以下为实现
  */
-public class BinnaryArithmeticOperation {
+public class BinaryArithmeticOperation {
 
 	public static void main(String[] args) {
 		int a = 99;
