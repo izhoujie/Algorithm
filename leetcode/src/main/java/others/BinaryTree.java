@@ -81,6 +81,14 @@ public class BinaryTree {
 		}
 	}
 
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年2月19日 下午2:19:05 
+	 * @param: @param root
+	 * @return: void
+	 * @Description: 二叉树层次遍历，BFS-广度优先算法
+	 *
+	 */
 	public static void binaryTreeLevelPrint(Node root) {
 		if (root == null) {
 			return;

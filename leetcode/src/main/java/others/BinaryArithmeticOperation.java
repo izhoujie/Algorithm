@@ -1,8 +1,8 @@
 package others;
 
 /**
- * @author admin@izhoujie.com
- *
+ * @author ZhouJie
+ * @Description: 
  *         2016年9月5日 23:37:05
  * 
  *         题干：求两个数的加减乘除，要求不能使用+、-、*、/算数运算符
