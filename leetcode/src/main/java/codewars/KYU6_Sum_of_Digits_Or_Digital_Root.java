@@ -43,7 +43,7 @@ public class KYU6_Sum_of_Digits_Or_Digital_Root {
 	 * @param: @param n
 	 * @param: @return
 	 * @return: int
-	 * @Description: 1-
+	 * @Description: 1-实质是递归求n的取模与取余的最终和小于10
 	 *
 	 */
 	public static int digital_root_1(int n) {
@@ -56,7 +56,7 @@ public class KYU6_Sum_of_Digits_Or_Digital_Root {
 	 * @param: @param n
 	 * @param: @return
 	 * @return: int
-	 * @Description: TODO
+	 * @Description: 1-暂时没看懂...（但比方法1的效率要高）
 	 *
 	 */
 	public static int digital_root_2(int n) {
