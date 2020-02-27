@@ -47,7 +47,7 @@ public class KYU6_Sum_of_Digits_Or_Digital_Root {
 	 *
 	 */
 	public static int digital_root_1(int n) {
-		return n < 9 ? n : digital_root_1(n / 10 + n % 10);
+		return n < 10 ? n : digital_root_1(n / 10 + n % 10);
 	}
 
 	/**
