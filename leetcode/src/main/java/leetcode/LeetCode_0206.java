@@ -44,18 +44,15 @@ class Solution_0206 {
 	 *
 	 */
 	public ListNode_0206 reverseList_1(ListNode_0206 head) {
-		if (head == null) {
-			return null;
+		ListNode_0206 pre = null;
+		ListNode_0206 next = null;
+		while (head != null) {
+			next = head.next;
+			head.next = pre;
+			pre = head;
+			head = next;
 		}
-		ListNode_0206 p1 = head.next, p2;
-		head.next = null;
-		while (p1 != null) {
-			p2 = p1.next;
-			p1.next = head;
-			head = p1;
-			p1 = p2;
-		}
-		return head;
+		return pre;
 	}
 
 	/**
