@@ -31,7 +31,7 @@ package leetcode;
 	思路：1-负数直接返回false，正数做一次反转再判是否与原数相等即可；
 		2-反转时只反转一半，然后对比值，如12321，反转得到123和12，只需要比较123==12||123/10==12即可（来自leetcoed官方解法）
  */
-public class Leetcode_0009 {
+public class LeetCode_0009 {
 
 }
 
