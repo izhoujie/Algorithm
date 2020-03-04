@@ -81,12 +81,22 @@ class Solution_0056 {
 		return Arrays.copyOf(rst, k);
 	}
 
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年3月4日 下午6:45:34 
+	 * @param: @param intervals
+	 * @param: @return
+	 * @return: int[][]
+	 * @Description: 2-逐步向后合并后筛选并返回；
+	 *
+	 */
 	public int[][] merge_2(int[][] intervals) {
 		if (intervals == null || intervals.length == 0) {
 			return intervals;
 		}
 		int len = intervals.length;
 		int count = 0;
+		// 每次取i和i之后的区间j对比，若可合并，则i合并到j，i自身设为null标记
 		for (int i = 0; i < len; i++) {
 			for (int j = i + 1; j < len; j++) {
 				int x1 = intervals[i][0];
@@ -95,18 +105,23 @@ class Solution_0056 {
 				int y2 = intervals[j][1];
 				int l = Math.min(x1, x2);
 				int r = Math.max(y1, y2);
+				// 判断是否可合并：ij区间的最大边界距离若小于等于ij各自区间的跨度和，则说明ij存在相接或重叠，可合并
 				if (r - l <= y1 - x1 + y2 - x2) {
 					intervals[j][0] = l;
 					intervals[j][1] = r;
+					// 合并后，i区间null标记
 					intervals[i] = null;
+					// 统计合并次数，用于判断及结果数组的长度定义
 					count++;
 					break;
 				}
 			}
 		}
+		// 未合并过，直接返回于原数组
 		if (count == 0) {
 			return intervals;
 		} else {
+			// 合并过，则新建数组，跳过null，将合并后的数组存放并返回
 			int[][] rst = new int[len - count][];
 			int k = 0;
 			for (int[] t : intervals) {
