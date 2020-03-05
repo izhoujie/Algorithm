@@ -67,7 +67,7 @@ class Solution_0119 {
 	 * 				获取杨辉三角的指定行
 	 * 				直接使用组合公式C(n,i) = n!/(i!*(n-i)!)
 	 * 				则第(i+1)项是第i项的倍数=(n-i)/(i+1);	
-	 * 				第i项：f(i)=f(i-1)*(n-i-1)/(i-1+1)
+	 * 				第i项：f(i)=f(i-1)*(n-i)/(i+1)
 	 *
 	 */
 	public List<Integer> getRow_2(int rowIndex) {
@@ -88,7 +88,7 @@ class Solution_0119 {
 	 * @return: List<Integer>
 	 * @Description: 3-公式，另一种写法；
 	 *
-	 *				第i项：f(i) =f(i-1)*(n-i+1)/k
+	 *				第i项：f(i) =f(i-1)*(n-i+1)/i
 	 *
 	 */
 	public List<Integer> getRow_3(int rowIndex) {
