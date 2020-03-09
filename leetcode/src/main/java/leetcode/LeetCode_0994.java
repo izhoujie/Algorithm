@@ -46,8 +46,8 @@ import java.util.Deque;
 	来源：力扣（LeetCode）
 	链接：https://leetcode-cn.com/problems/rotting-oranges
 	著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-	思路：1-DFS
-		2-对题的深入理解，用腐烂值加速DFS；（来自LeetCode已提交优秀解法）
+	思路：1-BFS
+		2-对题的深入理解，用腐烂值加速BFS；（来自LeetCode已提交优秀解法）
  */
 public class LeetCode_0994 {
 
@@ -60,7 +60,7 @@ class Solution_0994 {
 	 * @param: @param grid
 	 * @param: @return
 	 * @return: int
-	 * @Description: 1-DFS；
+	 * @Description: 1-BFS；
 	 *
 	 */
 	public int orangesRotting_1(int[][] grid) {
@@ -115,7 +115,7 @@ class Solution_0994 {
 	 * @param: @param grid
 	 * @param: @return
 	 * @return: int
-	 * @Description: 2-优化后的DFS；
+	 * @Description: 2-优化后的BFS；
 	 *
 	 */
 	public int orangesRotting_2(int[][] grid) {
@@ -123,7 +123,7 @@ class Solution_0994 {
 		int n = grid[0].length;
 		// 记录是否有坏橘子
 		boolean bad = false;
-		// 第一次遍历，遇到坏橘子直接dfs，并且每次增加腐烂值val(初始值2)，则最终的耗时为Max(val)-2
+		// 第一次遍历，遇到坏橘子直接bfs，并且每次增加腐烂值val(初始值2)，则最终的耗时为Max(val)-2
 		for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {
 				if (grid[i][j] == 2) {
