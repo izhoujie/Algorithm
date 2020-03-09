@@ -47,7 +47,7 @@ import java.util.Deque;
 	链接：https://leetcode-cn.com/problems/rotting-oranges
 	著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 	思路：1-BFS
-		2-对题的深入理解，用腐烂值加速BFS；（来自LeetCode已提交优秀解法）
+		2-DFS，给橘子一个腐败值的概念，让初始坏橘子不断的扩散并记录其路径上的腐败值，最终腐败值最大的就是耗时；（来自LeetCode已提交优秀解法）
  */
 public class LeetCode_0994 {
 
@@ -115,7 +115,7 @@ class Solution_0994 {
 	 * @param: @param grid
 	 * @param: @return
 	 * @return: int
-	 * @Description: 2-优化后的BFS；
+	 * @Description: 2-DFS；
 	 *
 	 */
 	public int orangesRotting_2(int[][] grid) {
@@ -123,7 +123,7 @@ class Solution_0994 {
 		int n = grid[0].length;
 		// 记录是否有坏橘子
 		boolean bad = false;
-		// 第一次遍历，遇到坏橘子直接bfs，并且每次增加腐烂值val(初始值2)，则最终的耗时为Max(val)-2
+		// 第一次遍历，遇到坏橘子直接dfs，并且每次增加腐烂值val(初始值2)，则最终的耗时为Max(val)-2
 		for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {
 				if (grid[i][j] == 2) {
@@ -155,24 +155,24 @@ class Solution_0994 {
 	 * @param: @param y
 	 * @param: @param val
 	 * @return: void
-	 * @Description: DFS辅助方法
+	 * @Description: DFS核心
 	 *
 	 */
 	private void dfs(int[][] grid, int x, int y, int val) {
-		// 先让好橘子腐烂，然后向四个方向扩散，遇到好橘子腐烂之增加腐烂值或遇到腐烂值比当前值+1还大则重置值并继续扩散
-		// 重置的理解：只有离好橘子最近的坏橘子才会有最大的腐烂值，等价于DFS的最短路径计算
-		grid[x][y] = val;
-		if (x > 0 && (grid[x - 1][y] == 1 || grid[x - 1][y] > val + 1)) {
-			dfs(grid, x - 1, y, val + 1);
-		}
-		if (x < grid.length - 1 && (grid[x + 1][y] == 1 || grid[x + 1][y] > val + 1)) {
-			dfs(grid, x + 1, y, val + 1);
-		}
-		if (y > 0 && (grid[x][y - 1] == 1 || grid[x][y - 1] > val + 1)) {
-			dfs(grid, x, y - 1, val + 1);
-		}
-		if (y < grid[0].length - 1 && (grid[x][y + 1] == 1 || grid[x][y + 1] > val + 1)) {
-			dfs(grid, x, y + 1, val + 1);
+		// 边界检测
+		if (x < 0 || x >= grid.length || y < 0 || y >= grid[0].length) {
+			return;
+			// 腐败值小于当前最大值的不再扩散，即DFS的剪枝
+		} else if (grid[x][y] != 1 && grid[x][y] < val) {
+			return;
+		} else {
+			// 符合要求的继续扩散
+			grid[x][y] = val;
+			val++;
+			dfs(grid, x - 1, y, val);
+			dfs(grid, x + 1, y, val);
+			dfs(grid, x, y - 1, val);
+			dfs(grid, x, y + 1, val);
 		}
 	}
 }
