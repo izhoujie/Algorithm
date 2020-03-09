@@ -120,7 +120,14 @@ class Solution_0076 {
 	 *
 	 */
 	public String minWindow_2(String s, String t) {
-
+		int tLen = 0, sLen = 0;
+		if (t == null || (tLen = t.length()) == 0) {
+			return "";
+		}
+		if (s == null || (sLen = s.length()) <= tLen) {
+			return "";
+		}
+		HashMap<Character, Integer> tMap = new HashMap<Character, Integer>();
 		return "";
 	}
 }
