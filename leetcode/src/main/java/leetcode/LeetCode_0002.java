@@ -29,11 +29,11 @@ public class LeetCode_0002 {
 /**
  * Definition for singly-linked list.
  */
-class ListNode {
+class ListNode_0002 {
 	int val;
-	ListNode next;
+	ListNode_0002 next;
 
-	ListNode(int x) {
+	ListNode_0002(int x) {
 		val = x;
 	}
 }
@@ -48,20 +48,20 @@ class Solution_0002 {
 	 * @UpdateRemark:思路1-设置一个进制标识变量，依次做加法即可； 
 	 *
 	 */
-	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+	public ListNode_0002 addTwoNumbers(ListNode_0002 l1, ListNode_0002 l2) {
 		if (l1 == null || l2 == null) {
 			return l1 == null ? l2 : l1;
 		}
 		// root 头结点，now为当前节点，last为now的前一节点，方便处理进位和最后一位的情况；carry为进位值
-		ListNode root = new ListNode(0);
-		ListNode now;
+		ListNode_0002 root = new ListNode_0002(0);
+		ListNode_0002 now;
 		now = root;
 		int carry = 0;
 		while (l1 != null || l2 != null || carry != 0) {
 			int val1 = (l1 == null ? 0 : l1.val);
 			int val2 = (l2 == null ? 0 : l2.val);
 			int val = (val1 + val2 + carry);
-			now.next = new ListNode(val % 10);
+			now.next = new ListNode_0002(val % 10);
 			carry = val / 10;
 			now = now.next;
 			l1 = (l1 == null ? null : l1.next);
