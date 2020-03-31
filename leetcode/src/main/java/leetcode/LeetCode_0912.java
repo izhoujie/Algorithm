@@ -1,7 +1,5 @@
 package leetcode;
 
-import java.util.Arrays;
-
 /**
  * @author ZhouJie
  * @date 2020年3月31日 上午12:02:03 
@@ -33,6 +31,7 @@ public class LeetCode_0912 {
 }
 
 class Solution_0912 {
+
 	/**
 	 * @author: ZhouJie
 	 * @date: 2020年3月31日 上午12:50:01 
@@ -43,7 +42,6 @@ class Solution_0912 {
 	 *
 	 */
 	public int[] sortArray(int[] nums) {
-		Arrays.sort(nums);
 		quickSort(nums, 0, nums.length - 1);
 		return nums;
 	}
