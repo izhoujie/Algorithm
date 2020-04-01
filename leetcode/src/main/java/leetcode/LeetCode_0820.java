@@ -64,8 +64,8 @@ class Solution_0820 {
 	 * @Description: 辅助索引节点
 	 *
 	 */
-	class TailNode {
-		TailNode[] next = new TailNode[26];
+	class TrieNode {
+		TrieNode[] next = new TrieNode[26];
 	}
 
 	/**
@@ -74,7 +74,7 @@ class Solution_0820 {
 	 * @param: @param words
 	 * @param: @return
 	 * @return: int
-	 * @Description: 2-Tail，建立字典索引
+	 * @Description: 2-Trie，建立字典索引
 	 *
 	 */
 	public int minimumLengthEncoding_2(String[] words) {
@@ -82,20 +82,21 @@ class Solution_0820 {
 		Arrays.sort(words, (s1, s2) -> s2.length() - s1.length());
 		int minLen = 0;
 		// 根索引
-		TailNode root = new TailNode();
+		TrieNode root = new TrieNode();
 		for (String s : words) {
 			// 每次都从根开始搜索
-			TailNode currNode = root;
+			TrieNode currNode = root;
 			// 当前单词是否需要单独新建索引
 			boolean f = false;
 			for (int i = s.length() - 1; i > -1; i--) {
+				// 细节， s.charAt(i) - 'a'即得到0-25对应到数组索引
 				int index = s.charAt(i) - 'a';
 				// 当前字符是否已建立索引，若未建立索引则新建索引并更新布尔值
 				if (currNode.next[index] == null) {
 					f = true;
-					currNode.next[index] = new TailNode();
+					currNode.next[index] = new TrieNode();
 				}
-				// 搜索下一个索引
+				// 搜索下一个单词索引
 				currNode = currNode.next[index];
 			}
 			if (f) {
