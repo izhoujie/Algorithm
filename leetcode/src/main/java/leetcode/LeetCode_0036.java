@@ -62,7 +62,7 @@ import java.util.HashSet;
 	著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 	思路：1-行，列，小宫格依次判断，单个set重复利用；
 		2-单次遍历，行列小宫格各需要空间分别记录，需要的空间比1多；
-		3-使用位运算记录；（待研究）
+		3-使用位运算记录，进一步降低辅助空间消耗；
  */
 public class LeetCode_0036 {
 
@@ -166,6 +166,52 @@ class Solution_0036 {
 						return false;
 					} else {
 						boxes[boxIndex][num] = 1;
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年4月3日 下午9:30:03 
+	 * @param: @param board
+	 * @param: @return
+	 * @return: boolean
+	 * @Description: 3-进一步压缩空间，使bit位来计算数据
+	 *
+	 */
+	public boolean isValidSudoku_3(char[][] board) {
+		// 行列小宫格的编号
+		int[] rows = new int[9];
+		int[] columns = new int[9];
+		int[] boxes = new int[9];
+
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				char c = board[i][j];
+				if (c != '.') {
+					int num = c - '1';
+					// 关注点，计算小宫格索引公式
+					int boxIndex = (i / 3) * 3 + j / 3;
+					// 行判断
+					if (((rows[i] >> num) & 1) == 1) {
+						return false;
+					} else {
+						rows[i] |= 1 << num;
+					}
+					// 列判断
+					if (((columns[j] >> num) & 1) == 1) {
+						return false;
+					} else {
+						columns[j] |= 1 << num;
+					}
+					// 小宫格判断
+					if (((boxes[boxIndex] >> num) & 1) == 1) {
+						return false;
+					} else {
+						boxes[boxIndex] |= 1 << num;
 					}
 				}
 			}
