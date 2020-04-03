@@ -81,6 +81,7 @@ class Solution_0008 {
 		if (str == null) {
 			return 0;
 		}
+		// 去除左右空白字符，且去除后长度不能为0
 		str = str.trim();
 		int len = str.length();
 		if (len < 1) {
@@ -89,6 +90,7 @@ class Solution_0008 {
 		int flag = 1;
 		int i = 0;
 		char c = str.charAt(0);
+		// 首个字符为+或-的预处理，同时记录符号
 		if (c == '-' || c == '+') {
 			i = 1;
 			if (c == '-') {
@@ -97,10 +99,12 @@ class Solution_0008 {
 		}
 		int rst = 0;
 		int check = 0;
+		// 逐个字符转化，每次/10与上一次的值校验用以判断是否溢出
 		for (; i < len; i++) {
 			int num = str.charAt(i) - '0';
 			if (num >= 0 && num <= 9) {
 				rst = rst * 10 + num * flag;
+				// 溢出校验，若本次结果已溢出，那么当前值/10必不等于上一次的值，利用溢出去校验溢出，巧妙
 				if (rst / 10 != check) {
 					return flag == 1 ? ((1 << 31) - 1) : (-1 << 31);
 				}
