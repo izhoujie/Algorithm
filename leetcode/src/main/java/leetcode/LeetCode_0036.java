@@ -179,7 +179,7 @@ class Solution_0036 {
 	 * @param: @param board
 	 * @param: @return
 	 * @return: boolean
-	 * @Description: 3-进一步压缩空间，使bit位来计算数据
+	 * @Description: 3-进一步压缩辅助空间，使bit位来计算数据
 	 *
 	 */
 	public boolean isValidSudoku_3(char[][] board) {
