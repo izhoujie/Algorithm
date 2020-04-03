@@ -20,6 +20,7 @@ package leetcode;
 	链接：https://leetcode-cn.com/problems/trapping-rain-water
 	著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 	思路：1-想象左右两块挡板，小的挡板有资格向里推进搜集雨水，直至搜集不到时再检测谁小继续搜集；
+		2-面积差数学求法，左扫一遍取最高值累加，右扫一遍取最高值累加，最后减去原数组的总值和最高值与数组长度构成的面积就是雨水的面积；
  */
 public class LeetCode_0042 {
 
@@ -35,7 +36,7 @@ class Solution_0042 {
 	 * @UpdateRemark:1- 
 	 *
 	 */
-	public int trap(int[] height) {
+	public int trap_1(int[] height) {
 		if (height == null) {
 			return 0;
 		}
@@ -60,5 +61,32 @@ class Solution_0042 {
 			}
 		}
 		return rst;
+	}
+
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年4月4日 上午2:03:37 
+	 * @param: @param height
+	 * @param: @return
+	 * @return: int
+	 * @Description: 2-面积差法，数学方法；
+	 *
+	 */
+	public int trap_2(int[] height) {
+		if (height == null) {
+			return 0;
+		}
+		int rst = 0, leftMax = 0, rightMax = 0, len = height.length;
+		int i = 0, j = len - 1;
+		while (i < len) {
+			// 从左向右不断求最大值，向右平铺面积值
+			leftMax = Math.max(leftMax, height[i]);
+			// 从右向左不断求最大值，向左平铺面积值
+			rightMax = Math.max(rightMax, height[j - i]);
+			// 顺带减去原数组的面积值
+			rst += leftMax + rightMax - height[i++];
+		}
+		// 最后减去平铺后最高点与数组长度组成的矩形面积就是雨水面积
+		return rst - len * leftMax;
 	}
 }
