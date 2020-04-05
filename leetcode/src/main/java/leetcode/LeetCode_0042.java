@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.util.Stack;
+
 /**
  * @author ZhouJie
  * @date 2020年2月1日 下午10:44:25 
@@ -88,5 +90,40 @@ class Solution_0042 {
 		}
 		// 最后减去平铺后最高点与数组长度组成的矩形面积就是雨水面积
 		return rst - len * leftMax;
+	}
+
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年4月5日 下午1:45:00 
+	 * @param: @param height
+	 * @param: @return
+	 * @return: int
+	 * @Description: 3-单调栈-单调递减栈
+	 *
+	 */
+	public int trap_3(int[] height) {
+		if (height == null) {
+			return 0;
+		}
+		Stack<Integer> stack = new Stack<Integer>();
+		int allRain = 0;
+		for (int i = 0; i < height.length; i++) {
+			while (!stack.isEmpty() && height[stack.peek()] < height[i]) {
+				int top = stack.pop();
+				// 小于栈顶元素就一直入栈
+				while (!stack.isEmpty() && height[stack.peek()] == height[top]) {
+					stack.pop();
+				}
+				if (!stack.isEmpty()) {
+					// 栈非空时可能搜集到雨水
+					// 搜集到的雨水为：左侧height[left]和右侧height[i]两个挡板的较低者减去中间的height[top]底部高度乘以
+					// left和i之间的距离(i - left - 1)
+					int left = stack.peek();
+					allRain += (Math.min(height[left], height[i]) - height[top]) * (i - left - 1);
+				}
+			}
+			stack.push(i);
+		}
+		return allRain;
 	}
 }
