@@ -37,7 +37,7 @@ class Solution_0022 {
 	 * @param: @param n
 	 * @param: @return
 	 * @return: List<String>
-	 * @Description: 1-根据左右闭合特性，依次放服n个“（”和“）”且放“）”时已放“（”的数量不能大于将要放入“）”的数量；
+	 * @Description: 1-根据左右闭合特性，依次放置n个“（”和“）”且放“）”时已放“（”的数量不能大于将要放入“）”的数量；
 	 *
 	 */
 	public List<String> generateParenthesis(int n) {
