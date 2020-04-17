@@ -29,13 +29,7 @@ package leetcode;
 		2-倒推，一次遍历；
  */
 public class LeetCode_0055 {
-	public static void main(String[] args) {
-		Solution_0055 obj = new Solution_0055();
-		int[] test = { 3, 2, 1, 0, 4 };
-		System.out.println(obj.canJump_1(test));
-		System.out.println(obj.canJump_2(test));
 
-	}
 }
 
 class Solution_0055 {
@@ -45,7 +39,7 @@ class Solution_0055 {
 	 * @param: @param nums
 	 * @param: @return
 	 * @return: boolean
-	 * @Description: 1-
+	 * @Description: 1-最开始的思路写的，优化后为方法3--canJump_3
 	 *
 	 */
 	public boolean canJump_1(int[] nums) {
@@ -81,7 +75,7 @@ class Solution_0055 {
 	 * @param: @param nums
 	 * @param: @return
 	 * @return: boolean
-	 * @Description: 2-
+	 * @Description: 2-从后向前检测
 	 *
 	 */
 	public boolean canJump_2(int[] nums) {
@@ -90,10 +84,40 @@ class Solution_0055 {
 		}
 		int check = nums.length - 1;
 		for (int i = check; i > -1; i--) {
+			// 若该位置可达，则更新为新的可达位置，即把i值往最小收敛，为0即为可达
 			if (i + nums[i] >= check) {
 				check = i;
 			}
 		}
 		return check == 0;
+	}
+
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年4月17日 下午8:25:56 
+	 * @param: @param nums
+	 * @param: @return
+	 * @return: boolean
+	 * @Description: 3-对方法1的优化，其实方法1的内循环就是贪心思想，但是这个处理可以提出来并到外循环，避免二次for
+	 *
+	 */
+	public boolean canJump_3(int[] nums) {
+		if (nums == null || nums.length < 2) {
+			return true;
+		}
+		int len = nums.length;
+		// 可到达的最远位置
+		int end = 0;
+		for (int i = 0; i < len; i++) {
+			// 若当前位置可达
+			if (i <= end) {
+				// 更新最远可达位置，若可达终点直接return
+				end = Math.max(end, i + nums[i]);
+				if (end >= len - 1) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

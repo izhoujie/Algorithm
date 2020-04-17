@@ -46,6 +46,7 @@ class Solution_0056 {
 		if (intervals == null || intervals.length == 0) {
 			return intervals;
 		}
+		// 按照左边界升序排序
 		Arrays.sort(intervals, new Comparator<int[]>() {
 			@Override
 			public int compare(int[] o1, int[] o2) {
@@ -55,30 +56,20 @@ class Solution_0056 {
 		int len = intervals.length;
 		int[][] rst = new int[len][2];
 		rst[0] = intervals[0];
-		int k = 1;
-		// [[2,3],[4,5],[6,7],[8,9],[1,10]]
+		int k = 0;
+		// 顺序合并
 		for (int i = 1; i < len; i++) {
-			boolean f = true;
-			for (int j = 0; j < k; j++) {
-				int x1 = intervals[i][0];
-				int y1 = intervals[i][1];
-				int x2 = rst[j][0];
-				int y2 = rst[j][1];
-				int l = Math.min(x1, x2);
-				int r = Math.max(y1, y2);
-				if (r - l <= y1 - x1 + y2 - x2) {
-					rst[j][0] = l;
-					rst[j][1] = r;
-					f = false;
-					break;
-				}
-			}
-			if (f) {
-				rst[k] = intervals[i];
-				k++;
+			int x1 = intervals[i][0];
+			int y1 = intervals[i][1];
+			int y2 = rst[k][1];
+			// 若i的左边界小于等于rst最后一个区间的右边界，则可合并，否增新增i至rst
+			if (x1 <= y2) {
+				rst[k][1] = Math.max(y1, y2);
+			} else {
+				rst[++k] = intervals[i];
 			}
 		}
-		return Arrays.copyOf(rst, k);
+		return Arrays.copyOf(rst, ++k);
 	}
 
 	/**
