@@ -116,6 +116,8 @@ class Solution_0055 {
 				if (end >= len - 1) {
 					return true;
 				}
+			} else {
+				return false;
 			}
 		}
 		return false;
