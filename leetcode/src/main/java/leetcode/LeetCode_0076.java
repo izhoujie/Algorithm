@@ -26,9 +26,6 @@ import java.util.HashMap;
 	之后l每次加1只需要再处理一次l+1位置即可；
  */
 public class LeetCode_0076 {
-	public static void main(String[] args) {
-		System.out.println(new Solution_0076().minWindow_1("dsgfergh", "eeesd"));
-	}
 
 }
 
@@ -43,7 +40,9 @@ class Solution_0076 {
 	 * @Description: 1-！！！首先，这个算法解不了这个题，题目太模糊了，我理解的是aa和aa应该返回a，但是答案要求返回aa；
 	 * 				这个算法写起来还是费了点脑子，留下了，记住不是本题的解：（以后看的时候提醒我自己）
 	 * 				算法缺陷，既然用了int位保存数据，那么字符串t的去重后的长度不应该超过32，本题按照我理解的去重后的最多
-	 * 				是26*2个，也是不够用的...
+	 * 				是26*2个，也是不够用的，考虑换64位的long类型应该就可以了；
+	 * 				
+	 * 				也就是说，使用位的方式解决了出现与不出现的问题，但是无法解决本题出现数量问题；
 	 *
 	 */
 	public String minWindow_1(String s, String t) {
@@ -115,19 +114,56 @@ class Solution_0076 {
 	 * @param: @param t
 	 * @param: @return
 	 * @return: String
-	 * @Description: 2-按照题意要求，将1的改造一下，has哈希表存对应字符出现次数；
+	 * @Description: 2-按照题意要求，将1的改造一下，hash哈希表存对应字符出现次数；
 	 * 				cache改为map类型，思路不变，但是改为校验cache的map与has是否完全一致即可；
+	 * 				
+	 * 				因为题目中的都是字母，所以不用HashMap改用128长度的数组足矣，
 	 *
 	 */
 	public String minWindow_2(String s, String t) {
 		int tLen = 0, sLen = 0;
+		// 特例判断
 		if (t == null || (tLen = t.length()) == 0) {
 			return "";
 		}
-		if (s == null || (sLen = s.length()) <= tLen) {
+		// 特例判断
+		if (s == null || (sLen = s.length()) < tLen) {
 			return "";
 		}
-		HashMap<Character, Integer> tMap = new HashMap<Character, Integer>();
-		return "";
+		// 需要找到的字母和数量，转为数组记录
+		int[] need = new int[128];
+		for (char c : t.toCharArray()) {
+			need[c]++;
+		}
+		// 滑动窗口中的字母和数量
+		int[] search = new int[128];
+		// 滑动窗口左右指针和统计匹配到t中字母的计数count
+		int left = 0, right = 0, count = 0;
+		int[] min = new int[] { 0, sLen };
+		while (right < sLen) {
+			char c = s.charAt(right);
+			// 记录s中当前字母数量，若是need中要找的，则count++且最多加need中的上限个
+			search[c]++;
+			if (need[c] > 0 && need[c] >= search[c]) {
+				count++;
+			}
+			// 若s中的字母在t中全找到了，则开始从左侧缩小窗口
+			while (count == tLen) {
+				c = s.charAt(left);
+				if (need[c] > 0 && need[c] >= search[c]) {
+					count--;
+				}
+				// 若找到了更小的窗口则更新
+				if (right - left < min[1] - min[0]) {
+					min[0] = left;
+					min[1] = right;
+				}
+				search[c]--;
+				left++;
+			}
+			right++;
+		}
+		// 需要验证min[1]，未找到时返回""，否则截取s返回，记得截取右侧位置要+1
+		return min[1] == sLen ? "" : s.substring(min[0], min[1] + 1);
 	}
 }
