@@ -49,7 +49,7 @@ class Solution_0033 {
 	 * @param: @param target
 	 * @param: @return
 	 * @return: int
-	 * @Description: 1-
+	 * @Description: 1-未优化前解法
 	 *
 	 */
 	public int search_1(int[] nums, int target) {
@@ -110,9 +110,9 @@ class Solution_0033 {
 			mid = left + (right - left) / 2;
 			if (nums[mid] == target) {
 				return mid;
-				// 若mid<right，说明右半边有序递增
+				// 若nums[mid] < nums[right]，说明右半边有序递增，这里不能先验左半边，因为mid可能与left相等
 			} else if (nums[mid] < nums[right]) {
-				// 目标值在右侧有序区间内
+				// 若目标值在右侧有序区间内
 				if (target > nums[mid] && target <= nums[right]) {
 					left = mid + 1;
 					// 目标在左侧区间
@@ -120,12 +120,13 @@ class Solution_0033 {
 					right = mid - 1;
 				}
 				// 若右半边无序，则说明左半边有序，在左半边进行判断
-				// 目标值在左半边有序区间内
-			} else if (target >= nums[left] && target < nums[mid]) {
-				right = mid - 1;
-				// 最后只剩右侧区间
 			} else {
-				left = mid + 1;
+				// 若目标值在左半边有序区间内
+				if (target >= nums[left] && target < nums[mid]) {
+					right = mid - 1;
+				} else {
+					left = mid + 1;
+				}
 			}
 		}
 		return -1;
