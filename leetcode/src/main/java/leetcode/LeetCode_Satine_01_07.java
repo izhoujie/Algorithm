@@ -47,7 +47,7 @@ package leetcode;
 	链接：https://leetcode-cn.com/problems/rotate-matrix-lcci
 	著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class LeetCode_Offer_01_07 {
+public class LeetCode_Satine_01_07 {
 	/**
 	 * @author: ZhouJie
 	 * @date: 2020年4月7日 下午2:00:23 
