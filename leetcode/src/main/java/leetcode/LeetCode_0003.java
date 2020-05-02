@@ -41,7 +41,7 @@ class Solution_0003 {
 	 * @Description: TODO(方法简述) 
 	 * @return int 
 	 * @UpdateUser-UpdateDate:[ZhouJie]-[2020年2月3日 上午11:08:25]  
-	 * @UpdateRemark:滑动窗口思想，ij指针渐进右移
+	 * @UpdateRemark:滑动窗口思想，双指针
 	 *
 	 */
 	public int lengthOfLongestSubstring(String s) {
@@ -49,28 +49,18 @@ class Solution_0003 {
 		if (s == null || (len = s.length()) < 2) {
 			return len;
 		}
-		int i, j, max;
-		max = i = j = 0;
-		while (i < len && j < len - 1) {
-			// 核心，从i的位置向后寻找j+1的字符第一次出现的位置，若位置在[i,j]之间则需要处理，否则说明无重复，j++后下一次循环
-			int index = s.indexOf(s.charAt(j + 1), i);
-			// 无重复，下一次循环
-			if (index == -1 || index > j) {
-				j++;
+		int left = 0, right = 0, max = 0;
+		while (right < len) {
+			int index = s.indexOf(s.charAt(right), left);
+			// 只要当前字符的首次出现位置index不在[left,right]区间内，则找到一个可能值，计算并记录，否则把left的位置重置为index+1
+			if (index < left || index >= right) {
+				max = Math.max(max, right - left + 1);
 			} else {
-				// 有重复，若在[i,j)之间，则i=index+1，否则说明index=j就直接j++并i=j，需要记录max
-				max = Math.max(max, j - i + 1);
-				if (index < j) {
-					i = index + 1;
-					j++;
-				} else {
-					j++;
-					i = j;
-				}
+				left = index + 1;
 			}
+			right++;
 		}
-		// 留心最后一次跳出后的判断
-		return Math.max(max, j - i + 1);
+		return max;
 	}
 
 	/**
