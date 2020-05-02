@@ -41,7 +41,7 @@ package leetcode;
 	著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 	
  */
-public class LeetCode_Offer_16_03 {
+public class LeetCode_Satine_16_03 {
 	public double[] intersection_1(int[] start1, int[] end1, int[] start2, int[] end2) {
 		// 两线段的x和y的最值
 		int minX1 = Math.min(start1[0], end1[0]);
