@@ -46,8 +46,21 @@ class TreeNode_0101 {
 }
 
 class Solution_0101 {
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年5月4日 下午11:34:28 
+	 * @param: @param root
+	 * @param: @return
+	 * @return: boolean
+	 * @Description: 1-递归校验；
+	 *
+	 */
 	public boolean isSymmetric(TreeNode_0101 root) {
-		return checkTree(root, root);
+		if (root == null) {
+			return true;
+		} else {
+			return checkTree(root.left, root.right);
+		}
 	}
 
 	private boolean checkTree(TreeNode_0101 left, TreeNode_0101 right) {

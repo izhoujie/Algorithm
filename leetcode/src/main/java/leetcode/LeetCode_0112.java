@@ -42,6 +42,16 @@ class TreeNode_0112 {
 }
 
 class Solution_0112 {
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年5月3日 下午5:22:53 
+	 * @param: @param root
+	 * @param: @param sum
+	 * @param: @return
+	 * @return: boolean
+	 * @Description: 1-递归减值判断；
+	 *
+	 */
 	public boolean hasPathSum(TreeNode_0112 root, int sum) {
 		if (root == null) {
 			return false;

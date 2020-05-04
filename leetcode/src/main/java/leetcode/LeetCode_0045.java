@@ -31,7 +31,16 @@ public class LeetCode_0045 {
 }
 
 class Solution_0045 {
-	public int jump(int[] nums) {
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年5月4日 下午11:18:38 
+	 * @param: @param nums
+	 * @param: @return
+	 * @return: int
+	 * @Description: 1-贪心算法，未优化；
+	 *
+	 */
+	public int jump_1(int[] nums) {
 		if (nums == null || nums.length <= 1) {
 			return 0;
 		}
@@ -57,5 +66,34 @@ class Solution_0045 {
 			i = k;
 		}
 		return count;
+	}
+
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年5月4日 下午11:19:27 
+	 * @param: @param nums
+	 * @param: @return
+	 * @return: int
+	 * @Description: 2-贪心算法，优化后；
+	 *
+	 */
+	public int jump_2(int[] nums) {
+		int len = nums.length - 1, steps = 0, subEnd = 0, maxPosition = 0;
+		// 只需要遍历到nums.length - 1的位置；
+		for (int i = 0; i < len; i++) {
+			// 当前i所能到达的最远处
+			maxPosition = Math.max(maxPosition, i + nums[i]);
+			// 如果当前位置已能到达尾部则返回；
+			if (maxPosition >= len) {
+				return ++steps;
+			}
+			// 计步的关键，每当i到达nums[i]的位置时完成一次贪心模式；
+			// 例子：nums[0]=3，则首次算一步，更新subEnd=3，待遍历到i=3时完成nums[0]的一次贪心模式计算；
+			if (i == subEnd) {
+				subEnd = maxPosition;
+				steps++;
+			}
+		}
+		return steps;
 	}
 }

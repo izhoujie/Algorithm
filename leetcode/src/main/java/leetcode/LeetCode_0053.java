@@ -47,4 +47,28 @@ class Solution_0053 {
 		}
 		return maxSum;
 	}
+
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年5月3日 下午12:53:11 
+	 * @param: @param nums
+	 * @param: @return
+	 * @return: int
+	 * @Description: 2-只要和为正数时就一直加，一旦变负则重置sum从下一个正数开始累加，期间记录sum的最大值；
+	 * 				sum值的图像类似在0上的递增递减曲线；
+	 *
+	 */
+	public int maxSubArray_2(int[] nums) {
+		int sum = 0;
+		int max = nums[0];
+		for (int val : nums) {
+			if (sum > 0) {
+				sum += val;
+			} else {
+				sum = val;
+			}
+			max = Math.max(max, sum);
+		}
+		return max;
+	}
 }
