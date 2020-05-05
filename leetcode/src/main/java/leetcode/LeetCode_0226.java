@@ -52,14 +52,11 @@ class Solution_0226 {
 	public TreeNode_0226 invertTree(TreeNode_0226 root) {
 		// 节点不为null时，左右节点交换，然后左右各自递归
 		if (root != null) {
-			TreeNode_0226 temp;
-			temp = root.left;
-			root.left = root.right;
-			root.right = temp;
-			invertTree(root.left);
-			invertTree(root.right);
+			TreeNode_0226 l = root.left;
+			TreeNode_0226 r = root.right;
+			root.left = invertTree(r);
+			root.right = invertTree(l);
 		}
-		// 节点为null返回自身，该层递归结束
 		return root;
 	}
 }
