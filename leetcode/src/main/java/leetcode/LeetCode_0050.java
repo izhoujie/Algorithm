@@ -42,22 +42,20 @@ class Solution_0050 {
 	 * @param: @param n
 	 * @param: @return
 	 * @return: double
-	 * @Description: 1-
+	 * @Description: 1-对n进行对数运算，对x进行幂计算；
 	 *
 	 */
 	public double myPow(double x, int n) {
-		if (n == 0) {
-			return 1;
-		}
-		double rst = 1.0;
-		for (int i = n; i != 0; i /= 2) {
-			// 关键点，只有在i初始为奇数和最终降幂为1时进行此处计算，其余的迭代i都是2的幂次方数，直接将x幂积即可；
-			if (i % 2 != 0) {
-				rst *= x;
+		boolean f = n > 0;
+		double y = 1.0;
+		while (n != 0) {
+			// 对n取对数的同时对x进行幂计算，若n不为2的倍数则补乘一次x；
+			if (n % 2 != 0) {
+				y *= x;
 			}
 			x *= x;
+			n /= 2;
 		}
-		// 判断n的符号来确定返回值
-		return n > 0 ? rst : 1 / rst;
+		return f ? y : 1 / y;
 	}
 }
