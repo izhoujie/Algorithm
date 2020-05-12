@@ -79,6 +79,15 @@ class Solution_Offer_36 {
 		return list.get(0);
 	}
 
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年5月12日 下午2:49:49 
+	 * @param: @param root
+	 * @param: @param list
+	 * @return: void
+	 * @Description: 中序遍历搜索二叉树得到排序list；
+	 *
+	 */
 	private void afterTree(Node_Offer_36 root, List<Node_Offer_36> list) {
 		if (root == null) {
 			return;
