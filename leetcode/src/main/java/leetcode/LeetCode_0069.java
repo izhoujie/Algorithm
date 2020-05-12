@@ -105,7 +105,7 @@ class Solution_0069 {
 	 * @param: @param x
 	 * @param: @return
 	 * @return: int
-	 * @Description: 4-位移递归；（来自LeetCode官方，还没看懂）
+	 * @Description: 4-位移递归，仍为二分查找；
 	 *
 	 */
 	public int mySqrt_4(int x) {
@@ -116,5 +116,22 @@ class Solution_0069 {
 		int right = left + 1;
 		// 必须先把一个right转为long 而不是转其乘积，乘积可能溢出变为负数
 		return (long) right * right > x ? left : right;
+	}
+
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年5月9日 下午1:21:29 
+	 * @param: @param x
+	 * @param: @return
+	 * @return: int
+	 * @Description: 5-袖珍计算器，对求根公式的变换；
+	 *
+	 */
+	public int mySqrt_5(int x) {
+		if (x == 0) {
+			return x;
+		}
+		int r = (int) Math.exp(0.5 * Math.log(x));
+		return (long) (r + 1) * (r + 1) <= x ? r + 1 : r;
 	}
 }
