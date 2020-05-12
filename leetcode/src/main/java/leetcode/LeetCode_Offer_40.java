@@ -87,7 +87,7 @@ class Solution_Offer_40 {
 	 * @param: @param k
 	 * @param: @return
 	 * @return: int[]
-	 * @Description: 2-条件局部快排；时间复杂度：logN N=arr.length
+	 * @Description: 2-条件局部快排；时间复杂度：N N=arr.length
 	 *
 	 */
 	public int[] getLeastNumbers_2(int[] arr, int k) {
