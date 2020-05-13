@@ -36,33 +36,6 @@ package leetcode;
  */
 public class LeetCode_Offer_68_2 {
 
-	/**
-	 * @author: ZhouJie
-	 * @date: 2020年3月7日 下午6:28:10 
-	 * @param: @param root
-	 * @param: @param p
-	 * @param: @param q
-	 * @param: @return
-	 * @return: TreeNode_Offer_68_2
-	 * @Description: 1-
-	 *
-	 */
-	public TreeNode_Offer_68_2 lowestCommonAncestor(TreeNode_Offer_68_2 root, TreeNode_Offer_68_2 p,
-			TreeNode_Offer_68_2 q) {
-		if (root == null || root == p || root == q) {
-			return root;
-		} else {
-			TreeNode_Offer_68_2 left = lowestCommonAncestor(root.left, p, q);
-			TreeNode_Offer_68_2 right = lowestCommonAncestor(root.right, p, q);
-			if (left == null) {
-				return right;
-			} else if (right == null) {
-				return left;
-			} else {
-				return root;
-			}
-		}
-	}
 }
 
 //  Definition for a binary tree node.
@@ -73,5 +46,38 @@ class TreeNode_Offer_68_2 {
 
 	TreeNode_Offer_68_2(int x) {
 		val = x;
+	}
+}
+
+class Solution_Offer_68_2 {
+
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年5月13日 下午12:38:22 
+	 * @param: @param root
+	 * @param: @param p
+	 * @param: @param q
+	 * @param: @return
+	 * @return: TreeNode_Offer_68_2
+	 * @Description: 1-直接递归校验节点；
+	 *
+	 */
+	public TreeNode_Offer_68_2 lowestCommonAncestor(TreeNode_Offer_68_2 root, TreeNode_Offer_68_2 p,
+			TreeNode_Offer_68_2 q) {
+		if (root == null || root == p || root == q) {
+			return root;
+		} else {
+			TreeNode_Offer_68_2 left = lowestCommonAncestor(root.left, p, q);
+			TreeNode_Offer_68_2 right = lowestCommonAncestor(root.right, p, q);
+			// 可以一行返回，但是可读性不好
+			// return left == null ? right : (right == null ? left : root);
+			if (left == null) {
+				return right;
+			} else if (right == null) {
+				return left;
+			} else {
+				return root;
+			}
+		}
 	}
 }

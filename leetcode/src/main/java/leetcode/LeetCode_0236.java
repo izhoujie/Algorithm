@@ -108,6 +108,8 @@ class Solution_0236 {
 		} else {
 			TreeNode_0236 left = lowestCommonAncestor_2(root.left, p, q);
 			TreeNode_0236 right = lowestCommonAncestor_2(root.right, p, q);
+			// 可以一行返回，但是可读性不好
+			// return left == null ? right : (right == null ? left : root);
 			if (left == null) {
 				return right;
 			} else if (right == null) {
