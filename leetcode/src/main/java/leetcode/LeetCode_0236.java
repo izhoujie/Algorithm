@@ -49,46 +49,6 @@ class TreeNode_0236 {
 }
 
 class Solution_0236 {
-	/**
-	 * @author: ZhouJie
-	 * @date: 2020年3月7日 下午6:20:23 
-	 * @param: @param root
-	 * @param: @param p
-	 * @param: @param q
-	 * @param: @return
-	 * @return: TreeNode_0236
-	 * @Description: 1-递归校验，走了弯路...
-	 *
-	 */
-	public TreeNode_0236 lowestCommonAncestor_1(TreeNode_0236 root, TreeNode_0236 p, TreeNode_0236 q) {
-		if (root == null) {
-			return null;
-		} else if (root == p || root == q) {
-			return root;
-		} else {
-			boolean f1 = check(root.left, p);
-			boolean f2 = check(root.right, q);
-			if (f1 == !f2) {
-				if (f1) {
-					return lowestCommonAncestor_1(root.left, p, q);
-				} else {
-					return lowestCommonAncestor_1(root.right, p, q);
-				}
-			} else {
-				return root;
-			}
-		}
-	}
-
-	private boolean check(TreeNode_0236 root, TreeNode_0236 node) {
-		if (root == null) {
-			return false;
-		} else if (root == node) {
-			return true;
-		} else {
-			return check(root.left, node) || check(root.right, node);
-		}
-	}
 
 	/**
 	 * @author: ZhouJie
@@ -98,16 +58,15 @@ class Solution_0236 {
 	 * @param: @param q
 	 * @param: @return
 	 * @return: TreeNode_0236
-	 * @Description: 2-还是递归，优化后；
-	 * 				理解：如果在两侧，则递归的left和right均不为null，返回root，否则，谁不为null则说明谁必为祖节点
+	 * @Description: 1-直接递归校验节点；
 	 *
 	 */
-	public TreeNode_0236 lowestCommonAncestor_2(TreeNode_0236 root, TreeNode_0236 p, TreeNode_0236 q) {
+	public TreeNode_0236 lowestCommonAncestor(TreeNode_0236 root, TreeNode_0236 p, TreeNode_0236 q) {
 		if (root == null || root == p || root == q) {
 			return root;
 		} else {
-			TreeNode_0236 left = lowestCommonAncestor_2(root.left, p, q);
-			TreeNode_0236 right = lowestCommonAncestor_2(root.right, p, q);
+			TreeNode_0236 left = lowestCommonAncestor(root.left, p, q);
+			TreeNode_0236 right = lowestCommonAncestor(root.right, p, q);
 			// 可以一行返回，但是可读性不好
 			// return left == null ? right : (right == null ? left : root);
 			if (left == null) {
