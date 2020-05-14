@@ -56,63 +56,51 @@ package leetcode;
 		接下来的流程就是NO.7题的思路
  */
 public class LeetCode_0008 {
-	public static void main(String[] args) {
-		Solution_0008 solution_0008 = new Solution_0008();
-		System.out.println(solution_0008.myAtoi("2147483648"));
-		Double.valueOf("53454.sdrf");
-	}
 
 }
 
 class Solution_0008 {
-
 	/**
-	 * @author ZhouJie
-	 * @date 2019年12月10日 下午7:00:52 
-	 * @Description: TODO(方法简述) 
-	 * @return int 
-	 * @UpdateUser-UpdateDate:[ZhouJie]-[2019年12月10日 下午7:00:52]  
-	 * @UpdateRemark:1-思路：
-	 * 					-先trim()左右去空并再次验非空；
-	 * 					-校验首字符是+-的情况
-	 * 					-逐个取字符转化数字并校验是否溢出
+	 * @author: ZhouJie
+	 * @date: 2020年5月14日 下午10:57:42 
+	 * @param: @param str
+	 * @param: @return
+	 * @return: int
+	 * @Description: 1-
+	 *
 	 */
-	public int myAtoi(String str) {
-		if (str == null) {
+	public int strToInt(String str) {
+		int len = 0;
+		// 首尾空白字符trim处理
+		if (str == null || ((len = (str = str.trim()).length()) == 0)) {
 			return 0;
 		}
-		// 去除左右空白字符，且去除后长度不能为0
-		str = str.trim();
-		int len = str.length();
-		if (len < 1) {
-			return 0;
-		}
-		int flag = 1;
 		int i = 0;
-		char c = str.charAt(0);
-		// 首个字符为+或-的预处理，同时记录符号
-		if (c == '-' || c == '+') {
-			i = 1;
+		int f = 1;
+		char c = str.charAt(i);
+		// 首字符符号校验
+		if (c == '+' || c == '-') {
+			i++;
 			if (c == '-') {
-				flag = -1;
+				f = -1;
 			}
 		}
-		int rst = 0;
-		int check = 0;
+		int before = 0, now = 0;
 		// 逐个字符转化，每次/10与上一次的值校验用以判断是否溢出
-		for (; i < len; i++) {
-			int num = str.charAt(i) - '0';
-			if (num >= 0 && num <= 9) {
-				rst = rst * 10 + num * flag;
+		while (i < len) {
+			c = str.charAt(i);
+			if (c >= '0' && c <= '9') {
+				before = now;
+				now = now * 10 + (c - '0') * f;
 				// 溢出校验，若本次结果已溢出，那么当前值/10必不等于上一次的值，利用溢出去校验溢出，巧妙
-				if (rst / 10 != check) {
-					return flag == 1 ? ((1 << 31) - 1) : (-1 << 31);
+				if (now / 10 != before) {
+					return f > 0 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
 				}
-				check = rst;
 			} else {
-				return rst;
+				return now;
 			}
+			i++;
 		}
-		return rst;
+		return now;
 	}
 }
