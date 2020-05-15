@@ -47,16 +47,16 @@ class Solution_Offer_63 {
 	 *
 	 */
 	public int maxProfit(int[] prices) {
+		int max = 0;
 		if (prices == null || prices.length == 0) {
-			return 0;
+			return max;
 		}
-		int min, max;
-		min = max = prices[0];
+		int min = prices[0];
 		for (int val : prices) {
-			// 记录截至当前的最小值
+			// 当前遇到的最小值
 			min = Math.min(min, val);
-			// 记录截至当前可以取得的最大差值
-			max = Math.min(max, val - min);
+			// 当前可以取到的最大差值
+			max = Math.max(max, val - min);
 		}
 		return max;
 	}
