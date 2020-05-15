@@ -37,7 +37,7 @@ class Solution_0560 {
 	 * @Description: 1-map存储前缀和；
 	 *
 	 */
-	public int subarraySum_(int[] nums, int k) {
+	public int subarraySum_1(int[] nums, int k) {
 		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
 		// 初始必须存入(0,1)，若不存而数组的第一项就是k，sum-k=0时就找不到0了
 		map.put(0, 1);
@@ -51,6 +51,45 @@ class Solution_0560 {
 			}
 			// 更新和为sum的出现次数
 			map.put(sum, map.getOrDefault(sum, 0) + 1);
+		}
+		return count;
+	}
+
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年5月15日 下午10:22:40 
+	 * @param: @param nums
+	 * @param: @param k
+	 * @param: @return
+	 * @return: int
+	 * @Description: 2-使用辅助数组替代map保存中间值；
+	 *
+	 */
+	public int subarraySum_2(int[] nums, int k) {
+		int min = 0, max = 0, sum = 0, count = 0, key;
+		// 求最大值和最小值，确定所有连续和的范围
+		for (int val : nums) {
+			sum += val;
+			max = Math.max(max, sum);
+			min = Math.min(min, sum);
+		}
+		// 用以记录连续和与min差的数组
+		int[] map = new int[max - min + 1];
+		sum = 0;
+		for (int val : nums) {
+			sum += val;
+			// 若连续和等于k直接记录
+			if (sum == k) {
+				count++;
+			}
+			// 在map中寻找其他连续和为sum-k-min的数量
+			// 解析：首先sum-min肯定存在，但是现在要多个k值，于是尝试多减去k，看剩余值仍否在[min,max]范围内，若在说明存在这样的连续子数组
+			key = sum - k;
+			if (key >= min && key <= max) {
+				count += map[key - min];
+			}
+			// 记录sum-min的数量
+			map[sum - min]++;
 		}
 		return count;
 	}
