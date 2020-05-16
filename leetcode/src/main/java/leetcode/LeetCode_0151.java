@@ -79,8 +79,7 @@ class Solution_0151 {
 				sb.insert(0, s0).insert(0, s1);
 			}
 		}
-		String rst = sb.toString();
-		return "".equals(rst) ? rst : rst.substring(1, rst.length());
+		return sb.length() == 0 ? "" : sb.substring(1).toString();
 	}
 
 }

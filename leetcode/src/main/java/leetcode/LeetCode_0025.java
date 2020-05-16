@@ -60,21 +60,14 @@ class Solution_0025 {
 		p1 = p2 = p3 = newHead = null;
 		int n = 1;
 		ListNode_0025 dummy = new ListNode_0025(0);
-		boolean flag = false;
 		dummy.next = head;
-
 		while (head != null) {
 			dummy.next = head;
-			while (n < k) {
-				if (head != null) {
-					head = head.next;
-					n++;
-				} else {
-					flag = true;
-					break;
-				}
+			while (head != null && n < k) {
+				head = head.next;
+				n++;
 			}
-			if (flag || head == null) {
+			if (n < k || head == null) {
 				break;
 			}
 			p2 = head;
@@ -84,13 +77,11 @@ class Solution_0025 {
 			reverse(null, dummy.next);
 			if (newHead == null) {
 				newHead = p2;
-				p1 = dummy.next;
-				p1.next = p3;
 			} else {
 				p1.next = p2;
-				p1 = dummy.next;
-				p1.next = p3;
 			}
+			p1 = dummy.next;
+			p1.next = p3;
 			head = p3;
 			n = 1;
 		}
@@ -129,19 +120,20 @@ class Solution_0025 {
 	public ListNode_0025 reverseKGroup_2(ListNode_0025 head, int k) {
 		ListNode_0025 now = head;
 		int count = 0;
-		while (now != null && count != k) {
+		while (now != null && count < k) {
 			now = now.next;
 			count++;
 		}
 		if (count == k) {
 			now = reverseKGroup_2(now, k);
-			// 有点绕- -|| head是前一个段的首节点，now是后一个段的首节点，当前递归处理完后，now变为上一个段的head节点，然后递归
+			// head是满足连续k个的最后一段首节点，now是最后一段尾节点的下一个节点
 			while (count-- > 0) {
 				ListNode_0025 temp = head.next;
 				head.next = now;
 				now = head;
 				head = temp;
 			}
+			// 返回当前段处理完后的头结点
 			return now;
 		}
 		return head;
