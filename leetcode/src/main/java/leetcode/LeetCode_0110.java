@@ -57,22 +57,61 @@ class TreeNode_0110 {
 }
 
 class Solution_0110 {
-	public boolean isBalanced(TreeNode_0110 root) {
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年5月18日 下午11:54:54 
+	 * @param: @param root
+	 * @param: @return
+	 * @return: boolean
+	 * @Description: 1-对根及左右子树递归计算高度差；
+	 *
+	 */
+	public boolean isBalanced_1(TreeNode_0110 root) {
 		// 当前节点为null或者其左右节点的高度差不大于1
-		return root == null || isBalanced(root.left) && isBalanced(root.right)
+		return root == null || isBalanced_1(root.left) && isBalanced_1(root.right)
 				&& Math.abs(maxDepth(root.left) - maxDepth(root.right)) < 2;
 	}
 
 	/**
-	 * @author ZhouJie
-	 * @date 2020年1月12日 上午12:27:38 
-	 * @Description: TODO(方法简述) 
-	 * @return int 
-	 * @UpdateUser-UpdateDate:[ZhouJie]-[2020年1月12日 上午12:27:38]  
-	 * @UpdateRemark:计算节点的最大高
+	 * @author: ZhouJie
+	 * @date: 2020年5月19日 上午11:54:20 
+	 * @param: @param root
+	 * @param: @return
+	 * @return: int
+	 * @Description: 计算树高
 	 *
 	 */
 	private int maxDepth(TreeNode_0110 root) {
 		return root == null ? 0 : Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+	}
+
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年5月18日 下午11:55:37 
+	 * @param: @param root
+	 * @param: @return
+	 * @return: boolean
+	 * @Description: 2-后续遍历，自底向上校验每层树的高度差，一旦不平衡直接返回，上层节点不再处理；
+	 *
+	 */
+	public boolean isBalanced_2(TreeNode_0110 root) {
+		return checkBlance(root) != -1;
+	}
+
+	private int checkBlance(TreeNode_0110 root) {
+		if (root == null) {
+			return 0;
+		}
+		// 递归计算左右子树的高度，若遇到-1代表树已在某一层已经不平衡，无需再递归了，直接返回
+		int left = checkBlance(root.left);
+		if (left == -1) {
+			return -1;
+		}
+		int right = checkBlance(root.right);
+		if (right == -1) {
+			return -1;
+		}
+		// 一旦任意同层左右子树的高度差大于1就直接返回-1，-1会直接返回，相当于剪枝，避免后面无意义的递归
+		return Math.abs(left - right) > 1 ? -1 : Math.max(left, right) + 1;
 	}
 }
