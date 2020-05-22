@@ -31,53 +31,15 @@ public class LeetCode_0034 {
 }
 
 class Solution_0034 {
-	/**
-	 * @author ZhouJie
-	 * @date 2020年2月1日 下午8:24:51 
-	 * @Description: TODO(方法简述) 
-	 * @return int[] 
-	 * @UpdateUser-UpdateDate:[ZhouJie]-[2020年2月1日 下午8:24:51]  
-	 * @UpdateRemark:1-二分查值，while确定边界，不是很好
-	 *
-	 */
-	public int[] searchRange(int[] nums, int target) {
-		int rst[] = { -1, -1 };
-		if (nums == null) {
-			return rst;
-		}
-		int len, left, right, mid, temp;
-		len = nums.length;
-		left = 0;
-		right = len - 1;
-		while (left <= right) {
-			mid = left + (right - left) / 2;
-			if (nums[mid] == target) {
-				temp = mid;
-				while (mid > -1 && nums[mid] == target) {
-					rst[0] = mid;
-					mid--;
-				}
-				while (temp < len && nums[temp] == target) {
-					rst[1] = temp;
-					temp++;
-				}
-				return rst;
-			} else if (nums[mid] < target) {
-				left = mid + 1;
-			} else {
-				right = mid - 1;
-			}
-		}
-		return rst;
-	}
 
 	/**
-	 * @author ZhouJie
-	 * @date 2020年2月1日 下午8:25:19 
-	 * @Description: TODO(方法简述) 
-	 * @return int[] 
-	 * @UpdateUser-UpdateDate:[ZhouJie]-[2020年2月1日 下午8:25:19]  
-	 * @UpdateRemark:2-左右边界分别二分查找
+	 * @author: ZhouJie
+	 * @date: 2020年5月22日 下午9:01:09 
+	 * @param: @param nums
+	 * @param: @param target
+	 * @param: @return
+	 * @return: int[]
+	 * @Description: 1-两次二分查找确定target的左右边界；
 	 *
 	 */
 	public int[] searchRange_1(int[] nums, int target) {
@@ -97,7 +59,6 @@ class Solution_0034 {
 
 	private int findBound(int[] nums, int target, boolean left) {
 		int l = 0, r = nums.length;
-
 		while (l < r) {
 			int m = (l + r) / 2;
 			// 关键点，left参数用来判断是找左边界还是找右边界
