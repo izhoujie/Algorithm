@@ -42,6 +42,15 @@ class TreeNode_0104 {
 }
 
 class Solution_0104 {
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020年5月22日 下午9:13:14 
+	 * @param: @param root
+	 * @param: @return
+	 * @return: int
+	 * @Description: 1-递归计算；
+	 *
+	 */
 	public int maxDepth(TreeNode_0104 root) {
 		return root == null ? 0 : Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
 	}

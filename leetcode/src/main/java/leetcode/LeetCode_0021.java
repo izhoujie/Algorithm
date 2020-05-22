@@ -17,7 +17,6 @@ package leetcode;
 	著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 	思路：1-两个指针依次遍历比较拼接即可；
 		2-leetcode优解递归；
-
  */
 public class LeetCode_0021 {
 
@@ -35,12 +34,13 @@ class ListNode_0021 {
 
 class Solution_0021 {
 	/**
-	 * @author ZhouJie
-	 * @date 2020年1月7日 上午12:32:39 
-	 * @Description: TODO(方法简述) 
-	 * @return ListNode_0021 
-	 * @UpdateUser-UpdateDate:[ZhouJie]-[2020年1月7日 上午12:32:39]  
-	 * @UpdateRemark:[本次修改内容]  
+	 * @author: ZhouJie
+	 * @date: 2020年5月22日 下午9:30:41 
+	 * @param: @param l1
+	 * @param: @param l2
+	 * @param: @return
+	 * @return: ListNode_0021
+	 * @Description: 1-迭代；
 	 *
 	 */
 	public ListNode_0021 mergeTwoLists_1(ListNode_0021 l1, ListNode_0021 l2) {
@@ -65,12 +65,13 @@ class Solution_0021 {
 	}
 
 	/**
-	 * @author ZhouJie
-	 * @date 2020年1月7日 上午12:35:50 
-	 * @Description: TODO(方法简述) 
-	 * @return ListNode_0021 
-	 * @UpdateUser-UpdateDate:[ZhouJie]-[2020年1月7日 上午12:35:50]  
-	 * @UpdateRemark:[本次修改内容]  
+	 * @author: ZhouJie
+	 * @date: 2020年5月22日 下午9:30:51 
+	 * @param: @param l1
+	 * @param: @param l2
+	 * @param: @return
+	 * @return: ListNode_0021
+	 * @Description: 2-递归；
 	 *
 	 */
 	public ListNode_0021 mergeTwoLists_2(ListNode_0021 l1, ListNode_0021 l2) {
