@@ -100,7 +100,6 @@ class Solution_0005 {
 		while (low > 0 && high < len - 1 && cs[low - 1] == cs[high + 1]) {
 			low--;
 			high++;
-
 		}
 		if (high - low > range[1] - range[0]) {
 			range[0] = low;
@@ -110,12 +109,12 @@ class Solution_0005 {
 	}
 
 	/**
-	 * @author ZhouJie
-	 * @date 2019年12月10日 下午3:55:19 
-	 * @Description: TODO(方法简述) 
-	 * @return String 
-	 * @UpdateUser-UpdateDate:[ZhouJie]-[2019年12月10日 下午3:55:19]  
-	 * @UpdateRemark:3-Manacher算法--待研究
+	 * @author: ZhouJie
+	 * @date: 2020年5月22日 下午9:47:36 
+	 * @param: @param s
+	 * @param: @return
+	 * @return: String
+	 * @Description: 3-Manacher算法--待研究
 	 *
 	 */
 	public String longestPalindrome_3(String s) {
