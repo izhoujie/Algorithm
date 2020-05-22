@@ -44,18 +44,18 @@ class Solution_0005 {
 			return s;
 		}
 		boolean[] p = new boolean[len];
-		String rst = "";
-
+		int[] range = new int[2];
 		for (int i = len - 1; i >= 0; i--) {
 			for (int j = len - 1; j >= i; j--) {
 				// j-i考虑到 像OO和OHO最后中心的奇偶问题
 				p[j] = s.charAt(i) == s.charAt(j) && (j - i < 3 || p[j - 1]);
-				if (p[j] && (j - i + 1 > rst.length())) {
-					rst = s.substring(i, j + 1);
+				if (p[j] && (j - i > range[1] - range[0])) {
+					range[0] = i;
+					range[1] = j;
 				}
 			}
 		}
-		return rst;
+		return s.substring(range[0], range[1] + 1);
 	}
 
 	/**
@@ -71,22 +71,24 @@ class Solution_0005 {
 		if (s == null || s.length() < 2) {
 			return s;
 		}
-		int[] rang = new int[2];
+		int[] range = new int[2];
 		char[] cs = s.toCharArray();
-
 		for (int i = 0; i < cs.length; i++) {
 			// 把回文看成中间部分都是同一字符且左右对称，寻找下一个与当前字符不同的位置
-			i = fastMove(cs, i, rang);
-			// 若剩余长度不足已知最大长度的一半时
-			if ((cs.length - i) * 2 < (rang[1] - rang[0] + 1)) {
+			i = fastMove(cs, i, range);
+			// 若剩余长度不足已知最大长度的一半时，直接跳出循环
+			// 剩余长度的下一个起始计算位置为i+1，以为i+1为中心的剩余最长回文为(length-1-(i+1))*2+1
+			// 即 (lenght-i-2)*2+1，一只的最大长度为range[1]-range[0]+1
+			// 所以判定条件为 (lenght-i-2)*2+1<range[1]-range[0]+1
+			// 即(lenght-i-2)*2<range[1]-range[0]
+			if ((cs.length - i - 2) * 2 < (range[1] - range[0])) {
 				break;
 			}
 		}
-
-		return s.substring(rang[0], rang[1] + 1);
+		return s.substring(range[0], range[1] + 1);
 	}
 
-	private int fastMove(char[] cs, int low, int[] rang) {
+	private int fastMove(char[] cs, int low, int[] range) {
 		int high = low;
 		int len = cs.length;
 		// 寻找下一个与low不等的字符
@@ -100,9 +102,9 @@ class Solution_0005 {
 			high++;
 
 		}
-		if (high - low > rang[1] - rang[0]) {
-			rang[0] = low;
-			rang[1] = high;
+		if (high - low > range[1] - range[0]) {
+			range[0] = low;
+			range[1] = high;
 		}
 		return nextI;
 	}
