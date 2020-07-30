@@ -62,8 +62,8 @@ class Solution_0029 {
 		if (divisor == 1 || divisor == -1) {
 			return divisor == 1 ? dividend : -dividend;
 		}
-		// 使用异或位运算记录商的符号：false为负数
-		boolean flag = (dividend ^ divisor) > 0 ? false : true;
+		// 使用异或位运算记录商的符号：false对应负数
+		boolean flag = (dividend ^ divisor) < 0 ? false : true;
 		int d1 = dividend;
 		int d2 = divisor;
 		// 都转为负数
@@ -91,6 +91,6 @@ class Solution_0029 {
 			d2 = d3;
 			multiple = 1;
 		}
-		return flag ? -quotient : quotient;
+		return flag ? quotient : -quotient;
 	}
 }
