@@ -43,7 +43,7 @@ class Solution_0696 {
 	 * @param: @param s
 	 * @param: @return
 	 * @return: int
-	 * @Description: 1-01压缩，压缩连续01的串为统计数，然后计算每一个数与前一个数的差值的累加和；
+	 * @Description: 1-01压缩，压缩连续01的串为统计数，然后计算每一个数与前一个数的最小值的累加和；
 	 *
 	 */
 	public int countBinarySubstrings(String s) {
