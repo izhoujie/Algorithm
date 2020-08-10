@@ -24,26 +24,43 @@ public class LeetCode_0415 {
 }
 
 class Solution_0415 {
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020-8-3 10:55:26 
+	 * @param: @param num1
+	 * @param: @param num2
+	 * @param: @return
+	 * @return: String
+	 * @Description: 倒序相加，使用StringBuilder
+	 *
+	 */
 	public String addStrings_1(String num1, String num2) {
 		num1 = num1 == null ? "0" : num1;
 		num2 = num2 == null ? "0" : num2;
 		StringBuilder sb = new StringBuilder();
-		int i = num1.length() - 1, j = num2.length() - 1;
-		int carry = 0;
+		int i = num1.length() - 1, j = num2.length() - 1, carry = 0;
 		while (i >= 0 || j >= 0) {
 			int a = i < 0 ? 0 : num1.charAt(i) - '0';
 			int b = j < 0 ? 0 : num2.charAt(j) - '0';
-			sb.insert(0, (a + b + carry) % 10);
-			carry = (a + b + carry) / 10;
+			carry += a + b;
+			sb.insert(0, carry % 10);
+			carry /= 10;
 			i--;
 			j--;
 		}
-		if (carry > 0) {
-			sb.insert(0, carry);
-		}
-		return sb.toString();
+		return carry > 0 ? sb.insert(0, carry).toString() : sb.toString();
 	}
 
+	/**
+	 * @author: ZhouJie
+	 * @date: 2020-8-3 10:55:49 
+	 * @param: @param num1
+	 * @param: @param num2
+	 * @param: @return
+	 * @return: String
+	 * @Description: 倒序相加，使用char数组
+	 *
+	 */
 	public String addStrings_2(String num1, String num2) {
 		num1 = num1 == null ? "0" : num1;
 		num2 = num2 == null ? "0" : num2;
@@ -75,7 +92,7 @@ class Solution_0415 {
 			}
 			cs2[p + i] = c;
 		}
-		if (len2 > len1) {
+		if (len2 > len1 && carry) {
 			for (int i = p - 1; i >= 0; i--) {
 				if (!carry) {
 					break;
