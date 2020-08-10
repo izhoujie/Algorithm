@@ -57,65 +57,60 @@ public class LeetCode_Satine_16_03 {
 		if (minX1 > maxX2 || minX2 > maxX1 || minY1 > maxY2 || minY2 > maxY1) {
 			return new double[0];
 		}
+		// 若均不存在斜率，那么x值已确定，y只需要取二者最小中的最大值即可
+		if (minX1 == maxX1 && minX2 == maxX2 && minX1 == maxX2) {
+			return new double[] { minX1, Math.max(minY1, minY2) };
+		}
 		// 计算y=kx+b的斜率k和截距b 以防斜率不存在计算k时使用三目运算给防御值0
 		double k1 = minX1 == maxX1 ? 0 : (start1[1] - end1[1]) * 1.0 / (start1[0] - end1[0]);
 		double k2 = minX2 == maxX2 ? 0 : (start2[1] - end2[1]) * 1.0 / (start2[0] - end2[0]);
 		double b1 = start1[1] - k1 * start1[0];
 		double b2 = start2[1] - k2 * start2[0];
-		// 若均不存在斜率，那么x值已确定，y只需要取二者最小中的最大值即可
-		if (minX1 == maxX1 && minX2 == maxX2 && minX1 == maxX2) {
-			return new double[] { minX1, Math.max(minY1, minY2) };
-			// 若其中之一无斜率，则x可确定，直接求y值，并判断y是否在无斜率的y区间内即可
-		} else if (start1[0] == end1[0]) {
+		// 若其中之一无斜率，则x可确定，直接求y值，并判断y是否在无斜率的y区间内即可
+		if (minX1 == maxX1) {
 			double y = k2 * minX1 + b2;
 			if (y >= minY1 && y <= maxY1) {
 				return new double[] { minX1, y };
 			} else {
 				return new double[0];
 			}
-		} else if (start2[0] == end2[0]) {
+		} else if (minX2 == maxX2) {
 			double y = k1 * minX2 + b1;
 			if (y >= minY2 && y <= maxY2) {
 				return new double[] { minX2, y };
 			} else {
 				return new double[0];
 			}
-		} else {
-			// 若斜率相等，则b不等比不想交，b相等时需要再分别判断重叠部分的情况
-			if (k1 == k2) {
-				if (b1 != b2) {
-					return new double[0];
-				}
-				boolean f = minX1 == minX2;
-				boolean f1 = minX1 > minX2;
-				boolean f2 = maxX1 < maxX2;
-				// 最小x不等，则直接取最小x中的最大x对应点返回，若相等，则反向判断最大x时的类似情况即可
-				if (f1 || (f && f2)) {
-					if (start1[0] < end1[0]) {
-						return new double[] { start1[0], start1[1] };
-					} else {
-						return new double[] { end1[0], end1[1] };
-					}
+		} else if (k1 == k2) {
+			// 若斜率相等，则b不等时必不想交，b相等时需要再分别判断重叠部分的情况
+			if (b1 != b2) {
+				return new double[0];
+				// 根据斜率的正负很容易判断左侧交点的情况
+			} else if (k1 > 0) {
+				if (minX1 > minX2) {
+					return new double[] { minX1, minY1 };
 				} else {
-					if (start2[0] < end2[0]) {
-						return new double[] { start2[0], start2[1] };
-					} else {
-						return new double[] { end2[0], end2[1] };
-					}
+					return new double[] { minX2, minY2 };
 				}
 			} else {
-				// 斜率都存在且不等，直接求节点，并判断区间即可
-				double x = (b2 - b1) / (k1 - k2);
-				double y = k1 * x + b1;
-
-				boolean f1 = x >= minX1 && x <= maxX1 && x >= minX2 && x <= maxX2;
-				boolean f2 = y >= minY1 && y <= maxY1 && y >= minY2 && y <= maxY2;
-
-				if (f1 && f2) {
-					return new double[] { x, y };
+				if (minX1 > minX2) {
+					return new double[] { minX1, maxY1 };
 				} else {
-					return new double[0];
+					return new double[] { minX2, maxX2 };
 				}
+			}
+		} else {
+			// 斜率都存在且不等，直接求节点并判断区间即可
+			double x = (b2 - b1) / (k1 - k2);
+			double y = k1 * x + b1;
+
+			boolean f1 = x >= minX1 && x <= maxX1 && x >= minX2 && x <= maxX2;
+			boolean f2 = y >= minY1 && y <= maxY1 && y >= minY2 && y <= maxY2;
+
+			if (f1 && f2) {
+				return new double[] { x, y };
+			} else {
+				return new double[0];
 			}
 		}
 	}
