@@ -64,10 +64,10 @@ class Solution_Offer_68_1 {
 			TreeNode_Offer_68_1 q) {
 		if (root == null) {
 			return root;
-			// pq值均大于root值，则祖节点在左子树中
+			// pq值均小于root值，则祖节点在左子树中
 		} else if (root.val > p.val && root.val > q.val) {
 			return lowestCommonAncestor_1(root.left, p, q);
-			// pq值均小于root值，则祖节点在右子树中
+			// pq值均大于root值，则祖节点在右子树中
 		} else if (root.val < p.val && root.val < q.val) {
 			return lowestCommonAncestor_1(root.right, p, q);
 			// pq值其一等于root值

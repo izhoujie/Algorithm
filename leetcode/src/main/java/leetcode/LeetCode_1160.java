@@ -69,10 +69,9 @@ class Solution_1160 {
 		int count = 0;
 		for (String s : words) {
 			if (s != null) {
-				char[] cs = s.toCharArray();
 				int[] cp = Arrays.copyOf(rawArray, rawArray.length);
 				boolean f = true;
-				for (char c : cs) {
+				for (char c : s.toCharArray()) {
 					if (--cp[c - 'a'] < 0) {
 						f = false;
 						break;

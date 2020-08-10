@@ -89,7 +89,7 @@ class Solution_1103 {
 	 */
 	public int[] distributeCandies_2(int candies, int num_people) {
 		int[] rst = new int[num_people];
-		// 倒数第二次分出去的是n个糖果，则n*(+1)/2<=candies；
+		// 倒数第二次分出去的是n个糖果，则n*(n+1)/2<=candies；
 		// 一元二次方程的根公式，若a*x²+b*x+c=0，则 x=(-b±sqrt(b*b-4ac)/2a)；
 		int n = (int) ((Math.sqrt(2 * candies + 0.25) - 0.5));
 		// time是总共完整分配的轮次数

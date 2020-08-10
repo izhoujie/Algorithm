@@ -39,7 +39,7 @@ class Solution_Offer_61 {
 	 * @param: @param nums
 	 * @param: @return
 	 * @return: boolean
-	 * @Description: 1-判断是否有重复和最小值与最大值差是否不大于4即可
+	 * @Description: 1-判断是否有重复等价于判断最小值与最大值差是否小于5即可
 	 *
 	 */
 	public boolean isStraight(int[] nums) {

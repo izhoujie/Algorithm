@@ -11,7 +11,7 @@ package leetcode;
 	
 	示例 1:
 	
-	输入:       1         1
+	输入:       	   1         1
 	          / \       / \
 	         2   3     2   3
 	
@@ -20,7 +20,7 @@ package leetcode;
 	输出: true
 	示例 2:
 	
-	输入:      1          1
+	输入:      	   1          1
 	          /           \
 	         2             2
 	
@@ -29,7 +29,7 @@ package leetcode;
 	输出: false
 	示例 3:
 	
-	输入:       1         1
+	输入:                  1         1
 	          / \       / \
 	         2   1     1   2
 	
