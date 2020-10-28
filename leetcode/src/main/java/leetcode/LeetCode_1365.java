@@ -60,7 +60,7 @@ class Solution_1365 {
         // 统计桶
         int[] bucket = new int[101];
         for (int val : nums) {
-            bucket[val] += 1;
+            bucket[val]++;
         }
         int count = 0;
         int temp;

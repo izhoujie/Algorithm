@@ -81,7 +81,7 @@ class Solution_1207 {
         // 把负值+1000变为正值以便数组下标都合法
         int[] all = new int[2001];
         for (int val : arr) {
-            all[val + 1000] += 1;
+            all[val + 1000]++;
         }
         Set<Integer> set = new HashSet<>();
         for (int val : all) {
