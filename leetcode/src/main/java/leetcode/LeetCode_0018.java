@@ -52,7 +52,7 @@ class Solution_0018 {
 	 *
 	 */
 	public List<List<Integer>> fourSum(int[] nums, int target) {
-		List<List<Integer>> list = new ArrayList<List<Integer>>();
+		List<List<Integer>> list = new ArrayList<>();
 		int len;
 		if (nums == null || (len = nums.length) < 4) {
 			return list;
@@ -77,10 +77,7 @@ class Solution_0018 {
 							// 第1、2个数确定后当前能组成的最大值和最小值，用于快速跳过
 							int min = nums[i] + nums[j] + nums[left] + nums[left + 1];
 							int max = nums[i] + nums[j] + nums[right] + nums[right - 1];
-							if (min > target) {
-								break;
-							}
-							if (max < target) {
+							if (min > target || max < target) {
 								break;
 							}
 							int test = nums[i] + nums[j] + nums[left] + nums[right];
@@ -119,7 +116,7 @@ class Solution_0018 {
 	 *
 	 */
 	public List<List<Integer>> nFourSum(int[] nums, int target, int n, int start) {
-		List<List<Integer>> list = new ArrayList<List<Integer>>();
+		List<List<Integer>> list = new ArrayList<>();
 		// 当前位置越界时返回结果
 		if (start >= nums.length) {
 			return list;
@@ -153,7 +150,7 @@ class Solution_0018 {
 				} else {
 					// 相等时，保存结果并左右指针都向中间移动，注意去重
 					// 此处不可使用Array.asList()，该方法返回的是不可修改的list
-					List<Integer> l = new ArrayList<Integer>();
+					List<Integer> l = new ArrayList<>();
 					l.add(nums[left]);
 					l.add(nums[right]);
 					list.add(l);
