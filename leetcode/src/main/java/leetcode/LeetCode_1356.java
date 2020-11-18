@@ -1,6 +1,8 @@
 package leetcode;
 
+
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 /**
  * @author zhoujie
@@ -64,7 +66,7 @@ class Solution_1356 {
      * @param: arr
      * @description: 用十进制的高位存bit为1的数量，用十进制的低位存原始值，把原始数扩充为十进制6个长度的值，然后用集合工具排序后还原值即可；
      */
-    public int[] sortByBits(int[] arr) {
+    public int[] sortByBits_1(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             // 高位存bit为1的值，低位存原始值
             arr[i] += Integer.bitCount(arr[i]) * 100000;
@@ -77,4 +79,28 @@ class Solution_1356 {
         }
         return arr;
     }
+
+    /**
+     * @return int[]
+     * @author zhoujie
+     * @date 2020/11/18 16:38
+     * @param: arr
+     * @description: java8 stream语法:Arrays.stream(arr)
+     */
+    public int[] sortByBits_2(int[] arr) {
+        return Arrays.stream(arr).map(e -> Integer.bitCount(e) * 100000 + e).sorted().map(e -> e % 100000).toArray();
+    }
+
+    /**
+     * @return int[]
+     * @author zhoujie
+     * @date 2020/11/18 16:47
+     * @param: arr
+     * @description: java8 IntStream语法:IntStream.of(arr)
+     */
+    public int[] sortByBits_3(int[] arr) {
+        return IntStream.of(arr).map(e -> Integer.bitCount(e) * 100000 + e).sorted().map(e -> e % 100000).toArray();
+    }
+
+
 }
