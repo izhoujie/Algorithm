@@ -59,12 +59,7 @@ class Solution_0973 {
      */
     public int[][] kClosest_1(int[][] points, int K) {
         // 优先队列，以点的平方和比较排序，降序排列，首个节点为最大
-        PriorityQueue<int[]> queue = new PriorityQueue<>(new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                return (o2[0] * o2[0] + o2[1] * o2[1]) - (o1[0] * o1[0] + o1[1] * o1[1]);
-            }
-        });
+        PriorityQueue<int[]> queue = new PriorityQueue<>((o1, o2) -> (o2[0] * o2[0] + o2[1] * o2[1]) - (o1[0] * o1[0] + o1[1] * o1[1]));
         // 先入K个点
         for (int i = 0; i < K; i++) {
             queue.offer(points[i]);
