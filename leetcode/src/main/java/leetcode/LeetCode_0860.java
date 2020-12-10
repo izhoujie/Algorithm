@@ -54,10 +54,6 @@ package leetcode;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class LeetCode_0860 {
-    public static void main(String[] args) {
-        int[] t = new int[]{5, 5, 5, 5, 20, 20, 5, 5, 20, 5};
-        System.out.println(new Solution_0860().lemonadeChange(t));
-    }
 }
 
 class Solution_0860 {
@@ -72,27 +68,20 @@ class Solution_0860 {
         int m5 = 0;
         int m10 = 0;
         // 仅需统计5和10的数量，且仅需在收到10和20时需要找零验证
-        for (int bill : bills) {
-            if (bill == 5) {
+        // 收到20，先尝试找零10+5，若失败则尝试找零5+5+5，还是失败可直接返回
+        for (int i = 0; i < bills.length && m5 > -1; i++) {
+            if (bills[i] == 5) {
                 m5++;
-            } else if (bill == 10) {
+            } else if (bills[i] == 10) {
+                m5--;
                 m10++;
-                if (--m5 < 0) {
-                    return false;
-                }
+            } else if (m10 > 0) {
+                m10--;
+                m5--;
             } else {
-                // 收到20，先尝试找零10+5，若失败则尝试找零5+5+5，还是失败可直接返回
-                --m10;
-                --m5;
-                if (m10 < 0 || m5 < 0) {
-                    m10++;
-                    m5 -= 2;
-                    if (m5 < 0) {
-                        return false;
-                    }
-                }
+                m5 -= 3;
             }
         }
-        return true;
+        return m5 > -1;
     }
 }
