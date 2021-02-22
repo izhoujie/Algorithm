@@ -47,11 +47,14 @@ class Solution_0697 {
      * @author zhoujie
      * @date 2021/2/20 下午4:41
      * @param: nums
-     * @description:
+     * @description: 记录每个值的首末出现位置（即当前值的连续子数组）和出现次数（即当前值的度），并在遍历的时候记录最大度的连续子数组最小长度
      */
     public int findShortestSubArray(int[] nums) {
+        // 统计每个值的子数组连续长度和度
         HashMap<Integer, Node_0697> map = new HashMap<>();
+        // 度
         int max = Integer.MIN_VALUE;
+        // 连续子数组的长度
         int min = Integer.MAX_VALUE;
         for (int i = 0; i < nums.length; i++) {
             int val = nums[i];
@@ -64,6 +67,10 @@ class Solution_0697 {
                 node.end = i;
             }
             int len = node.end - node.start + 1;
+            // 若当前值的度：
+            // 等于max：更新min
+            // 大于max：更新min和max
+            // 小于max：忽略
             if (node.count == max) {
                 min = Math.min(min, len);
             } else if (node.count > max) {
@@ -74,10 +81,12 @@ class Solution_0697 {
         return min;
     }
 
+    // 记录数组值的信息
     class Node_0697 {
         int start;
         int end;
         int value;
+        // 当前值度
         int count;
 
         public Node_0697(int start, int end, int value, int count) {
