@@ -1,5 +1,8 @@
 package leetcode;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * @author zhoujie
  * @date 2021/2/22 下午2:46
@@ -56,11 +59,78 @@ class Solution_0766 {
      * @author zhoujie
      * @date 2021/2/22 下午2:47
      * @param: matrix
-     * @description:
+     * @description: BFS，按对角线逐个线校验
      */
-    public boolean isToeplitzMatrix(int[][] matrix) {
+    public boolean isToeplitzMatrix_1(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        boolean f = m > n;
+        Deque<Integer> deque = new LinkedList<>();
+        deque.offerFirst(f ? ((m - 1) * m) : (m - 1));
+        int i, j, number;
+        while (!deque.isEmpty()) {
+            int size = deque.size();
+            int val = deque.peekLast();
+            if (f) {
+                i = val / m;
+                j = val % m;
+            } else {
+                j = val / n;
+                i = val % n;
+            }
+            number = matrix[i][j];
+            if (i > 0) {
+                deque.offerFirst(f ? (i - 1) * m + j : j * n + i - 1);
+            }
+            while (size-- > 0) {
+                val = deque.pollLast();
+                if (f) {
+                    i = val / m;
+                    j = val % m;
+                } else {
+                    j = val / n;
+                    i = val % n;
+                }
+                if (matrix[i][j] == number) {
+                    if (j < n - 1) {
+                        deque.offerFirst(f ? i * m + (j + 1) : (j + 1) * n + i);
+                    }
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
-
+    /**
+     * @return boolean
+     * @author zhoujie
+     * @date 2021/2/25 上午10:47
+     * @param: matrix
+     * @description: 遍历，从中斜线分两部分遍历校验
+     */
+    public boolean isToeplitzMatrix_2(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        for (int k = 0; k < m; k++) {
+            int j = 0, i = k;
+            int val = matrix[i][j];
+            while (++i < m && ++j < n) {
+                if (matrix[i][j] != val) {
+                    return false;
+                }
+            }
+        }
+        for (int k = 1; k < n; k++) {
+            int i = 0, j = k;
+            int val = matrix[i][j];
+            while (++i < m && ++j < n) {
+                if (matrix[i][j] != val) {
+                    return false;
+                }
+            }
+        }
         return true;
     }
 
