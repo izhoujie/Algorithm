@@ -200,6 +200,11 @@ class SnowFlakeIdWorker {
  * @author zhoujie
  * @date 2021/5/17 下午5:10
  * @description: 基于SnowFlake改造的32长度hex进制的ID生成方案
+ * 总128bit长度，32hex长度：
+ * <p>
+ * 32bit记录k8s的主机IP + 32bit记录pod的IP + 52bit时间戳 + 12bit序列号
+ * <p>
+ * 32bit + 32bit + 52bit +12bit = 8hex + 8hex + 13hex + 3hex = 32hex
  */
 class SnowFlakeIdUtil {
 
@@ -283,22 +288,24 @@ class SnowFlakeIdUtil {
     /**
      * @author zhoujie
      * @date 2021/5/17 下午5:15
-     * @description: 生成32长度16进制的ID，方法必须同步，线程安全：
+     * @description: 改造后的生成ID方案，生成32长度16进制的ID：
      * <p>
      * host_ip + pod_ip + 时间戳 + 序列号
      * <p>
      * 8hex + 8hex + 13hex +3hex
      */
-    private static synchronized String getMsgId() {
+    private static String getMsgId() {
         long nextId = nextId();
         long seq = nextId & sequenceMask;
         long unixTime = nextId >> sequenceBits;
 
         StringBuilder msgIdBuffer = new StringBuilder(32);
+        // 末3位hex为序列号
         msgIdBuffer.append(Long.toHexString(seq));
         while (msgIdBuffer.length() < 3) {
             msgIdBuffer.insert(0, "0");
         }
+        // 中间13位hex为时间戳
         msgIdBuffer.insert(0, Long.toHexString(unixTime));
         while (msgIdBuffer.length() < 16) {
             msgIdBuffer.insert(0, "0");
@@ -307,6 +314,7 @@ class SnowFlakeIdUtil {
         if (IP_HEX_PART == null) {
             IP_HEX_PART = ipToHexString(HOST_IP) + ipToHexString(POD_IP);
         }
+        // 前16位为环境相关的两个IP地址
         return msgIdBuffer.insert(0, IP_HEX_PART).toString().toUpperCase();
     }
 
@@ -359,12 +367,20 @@ class SnowFlakeIdUtil {
         return msgIdInfo;
     }
 
+    /**
+     * @return java.lang.String
+     * @author zhoujie
+     * @date 2021/5/18 下午3:19
+     * @param: hexIpStr
+     * @description: 把16进制的字符串ip转为常规显示
+     */
     private static String hexStrToIp(String hexIpStr) {
+
         int step = 2;
         StringBuilder ipBuffer = new StringBuilder(17);
         for (int i = 0; i < hexIpStr.length(); i += step) {
             String ipPart = hexIpStr.substring(i, i + step);
-            ipBuffer.append(new BigInteger(ipPart, 16).toString(10)).append(".");
+            ipBuffer.append(new BigInteger(ipPart, 16).toString()).append(".");
         }
         ipBuffer.setLength(ipBuffer.length() - 1);
         return ipBuffer.toString();
