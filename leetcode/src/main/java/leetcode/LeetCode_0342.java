@@ -49,9 +49,6 @@ class Solution_0342 {
      * @date 2021/5/31 上午10:55
      * @param: n
      * @description: 判断bit位是否有且只有一个1且在正确的位置
-     * <p>
-     * 1-先用与位运算获得1的数量；
-     * 2-计算汉明重量；
      */
     public boolean isPowerOfFour_1(int n) {
         // 以4为底的所有正数幂|运算后的bit表示
