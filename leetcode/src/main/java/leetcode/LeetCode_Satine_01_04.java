@@ -37,6 +37,7 @@ public class LeetCode_Satine_01_04 {
     public boolean canPermutePalindrome_1(String s) {
         HashSet<Character> set = new HashSet<>();
         for (char c : s.toCharArray()) {
+            // 若add失败说明c已存在，remove之
             if (!set.add(c)) {
                 set.remove(c);
             }
@@ -55,6 +56,7 @@ public class LeetCode_Satine_01_04 {
         int[] ints = new int[128];
         int count = 0;
         for (char c : s.toCharArray()) {
+            // 若c数量在++之前是奇数，则算上当前的c有偶数个，count需要-1，否则count需要+1
             if ((ints[c]++ & 1) == 1) {
                 count--;
             } else {
@@ -72,6 +74,7 @@ public class LeetCode_Satine_01_04 {
      * @description: 用两个long统计各个bit位出现的奇偶性
      */
     public boolean canPermutePalindrome_3(String s) {
+        // ascii共128个字符，用两个long共64*2的bit位来统计每个字符出现的奇偶性
         long low = 0;
         long high = 0;
         for (char c : s.toCharArray()) {
