@@ -51,7 +51,7 @@ class Solution_0946 {
 	 *
 	 */
 	public boolean validateStackSequences(int[] pushed, int[] popped) {
-		Stack<Integer> stack = new Stack<Integer>();
+		Stack<Integer> stack = new Stack<>();
 		int len = popped.length, k = 0;
 		for (int i = 0; i < len; i++) {
 			stack.push(pushed[i]);
